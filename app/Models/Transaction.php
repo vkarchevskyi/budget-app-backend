@@ -10,6 +10,37 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ *
+ *
+ * @property int $id
+ * @property int $category_id
+ * @property int $user_id
+ * @property int $account_id
+ * @property float $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Account $account
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Transaction extends Model
 {
     /** @use HasFactory<TransactionFactory> */

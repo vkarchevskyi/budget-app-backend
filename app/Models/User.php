@@ -39,6 +39,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
