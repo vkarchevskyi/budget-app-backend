@@ -16,7 +16,7 @@ class CreateBudgetDTO extends Data
         public float $size,
         public int $categoryId,
         public int $userId,
-        public Carbon $month,
+        public Carbon $date,
     ) {
     }
 }

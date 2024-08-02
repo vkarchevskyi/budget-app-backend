@@ -15,7 +15,7 @@ class CreateAccountAction
      */
     public function run(CreateAccountDTO $createAccountDTO): void
     {
-        DB::transaction(function () use ($createAccountDTO) {
+        DB::transaction(function () use ($createAccountDTO): void {
             Account::query()
                 ->create([
                     'name' => $createAccountDTO->name,
