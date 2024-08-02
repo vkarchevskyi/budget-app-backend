@@ -15,15 +15,10 @@ class UpdateAccountBalanceAction
      */
     public function run(int $id, UpdateAccountBalanceDTO $accountBalanceDTO): void
     {
-        DB::transaction(function () use ($id, $accountBalanceDTO) {
-            /** @var Account $account */
-            $account = Account::query()
+        DB::transaction(function () use ($id, $accountBalanceDTO): void {
+            Account::query()
                 ->where('id', '=', $id)
-                ->firstOrFail(['id', 'balance']);
-
-            $account->balance += $accountBalanceDTO->balanceChange;
-
-            $account->save();
+                ->increment('balance', $accountBalanceDTO->balanceChange);
         });
     }
 }
