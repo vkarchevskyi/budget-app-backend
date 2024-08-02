@@ -14,10 +14,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  *
  * @property int $id
+ * @property string $name
+ * @property string|null $description
  * @property int $category_id
  * @property int $user_id
  * @property int $account_id
- * @property float $price
+ * @property int $price
+ * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -32,8 +35,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereAccountId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUserId($value)

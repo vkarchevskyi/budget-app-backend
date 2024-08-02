@@ -14,6 +14,8 @@ return new class () extends Migration {
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->float('size', 2);
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
@@ -30,7 +32,7 @@ return new class () extends Migration {
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
-            $table->date('month');
+            $table->date('date');
 
             $table->timestamps();
             $table->softDeletes();

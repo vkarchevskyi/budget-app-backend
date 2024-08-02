@@ -16,10 +16,11 @@ class CreateAccountAction
     public function run(CreateAccountDTO $createAccountDTO): void
     {
         DB::transaction(function () use ($createAccountDTO) {
-            Account::create([
-                'name' => $createAccountDTO->name,
-                'balance' => $createAccountDTO->balance,
-            ]);
+            Account::query()
+                ->create([
+                    'name' => $createAccountDTO->name,
+                    'balance' => $createAccountDTO->balance,
+                ]);
         });
     }
 }

@@ -16,7 +16,8 @@ class UpdateAccountAction
     public function run(int $id, UpdateAccountDTO $updateAccountDTO): void
     {
         DB::transaction(function () use ($id, $updateAccountDTO) {
-            Account::where('id', '=', $id)
+            Account::query()
+                ->where('id', '=', $id)
                 ->firstOrFail(['id'])
                 ->update([
                     'name' => $updateAccountDTO->name,

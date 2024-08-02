@@ -51,14 +51,18 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "pint": [
+        "pint-fix": [
             "./vendor/bin/pint"
         ],
-        "pint-test": [
+        "pint-lint": [
             "./vendor/bin/pint --test"
         ],
         "phpstan": [
             "./vendor/bin/phpstan analyze --memory-limit=2G"
+        ],
+        "phpdoc": [
+            "@php artisan ide-helper:models",
+            "./vendor/bin/pint app"
         ]
     },
     "extra": {

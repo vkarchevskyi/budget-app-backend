@@ -17,7 +17,8 @@ class UpdateAccountBalanceAction
     {
         DB::transaction(function () use ($id, $accountBalanceDTO) {
             /** @var Account $account */
-            $account = Account::where('id', '=', $id)
+            $account = Account::query()
+                ->where('id', '=', $id)
                 ->firstOrFail(['id', 'balance']);
 
             $account->balance += $accountBalanceDTO->balanceChange;

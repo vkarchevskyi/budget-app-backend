@@ -14,11 +14,13 @@ return new class () extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('account_id');
 
-            $table->float('price', 2);
+            $table->integer('price');
 
             $table->foreign('account_id')
                 ->references('id')
@@ -37,6 +39,8 @@ return new class () extends Migration {
                 ->on('users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+
+            $table->datetime('date');
 
             $table->timestamps();
             $table->softDeletes();

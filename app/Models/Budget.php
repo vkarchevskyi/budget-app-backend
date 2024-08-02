@@ -14,10 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  *
  * @property int $id
+ * @property string $name
+ * @property string|null $description
  * @property float $size
  * @property int $category_id
  * @property int $user_id
- * @property string $month
+ * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -30,9 +32,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget query()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Budget whereMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUserId($value)
