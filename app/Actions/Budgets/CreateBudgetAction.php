@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Budget;
+namespace App\Actions\Budgets;
 
 use App\DTO\Budgets\CreateBudgetDTO;
 use App\Models\Budget;
