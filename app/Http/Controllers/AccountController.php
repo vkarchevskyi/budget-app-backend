@@ -8,8 +8,8 @@ use App\Actions\Accounts\CreateAccountAction;
 use App\Actions\Accounts\UpdateAccountAction;
 use App\DTO\Accounts\CreateAccountDTO;
 use App\DTO\Accounts\UpdateAccountDTO;
-use App\Http\Requests\CreateAccountRequest;
-use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Requests\Accounts\CreateAccountRequest;
+use App\Http\Requests\Accounts\UpdateAccountRequest;
 use App\Resources\Accounts\AccountResource;
 use Throwable;
 
