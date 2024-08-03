@@ -13,9 +13,8 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 class CreateBudgetDTO extends Data
 {
     public function __construct(
-        public float $size,
+        public int $size,
         public int $categoryId,
-        public int $userId,
         public Carbon $date,
     ) {
     }

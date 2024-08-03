@@ -9,7 +9,7 @@ use Spatie\LaravelData\Data;
 class UpdateBudgetDTO extends Data
 {
     public function __construct(
-        public float $size,
+        public int $size,
     ) {
     }
 }

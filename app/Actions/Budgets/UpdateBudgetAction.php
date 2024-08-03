@@ -14,14 +14,15 @@ class UpdateBudgetAction
     /**
      * @throws Throwable
      */
-    public function run(int $id, UpdateBudgetDTO $updateBudgetDTO): void
+    public function run(int $id, UpdateBudgetDTO $updateBudgetDTO): Budget
     {
-        DB::transaction(function () use ($id, $updateBudgetDTO): void {
-            Budget::query()
-                ->where('id', '=', $id)
-                ->update([
-                    'size' => $updateBudgetDTO->size,
-                ]);
+        return DB::transaction(function () use ($id, $updateBudgetDTO): Budget {
+            $budget = Budget::query()->findOrFail($id);
+
+            // TODO: add policy
+
+            $budget->update(['size' => $updateBudgetDTO->size]);
+            return $budget;
         });
     }
 }
