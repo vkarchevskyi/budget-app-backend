@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 
 readonly class GetThrottleKeyService
 {
-    public function run(string $email, string $ip): string
+    public function run(string $email, ?string $ip): string
     {
-        return Str::transliterate(Str::lower($email) . '|' . $ip);
+        return Str::transliterate(Str::lower($email) . '|' . ($ip ?? ''));
     }
 }

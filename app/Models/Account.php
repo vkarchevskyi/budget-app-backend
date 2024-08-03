@@ -54,7 +54,7 @@ class Account extends Model
     ];
 
     /**
-     * @return BelongsTo<User, Category>
+     * @return BelongsTo<User, Account>
      */
     public function user(): BelongsTo
     {

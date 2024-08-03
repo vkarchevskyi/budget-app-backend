@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): Response
     {
-        $key = $this->getThrottleKeyService->run($request->input('email'), $request->ip());
+        $key = $this->getThrottleKeyService->run($request->string('email')->toString(), $request->ip());
 
         $this->ensureIsNotRateLimitedService->run($request, $key);
 

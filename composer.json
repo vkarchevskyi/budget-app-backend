@@ -61,6 +61,9 @@
         "phpstan": [
             "./vendor/bin/phpstan analyze --memory-limit=2G"
         ],
+        "larastan": [
+            "./vendor/bin/phpstan analyze --memory-limit=2G"
+        ],
         "phpdoc": [
             "@php artisan ide-helper:models",
             "./vendor/bin/pint app"

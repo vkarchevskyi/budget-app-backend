@@ -21,7 +21,7 @@ class CreateAccountAction
                 ->create([
                     'name' => $createAccountDTO->name,
                     'balance' => 0,
-                    'user_id' => auth()->user()->getAuthIdentifier(),
+                    'user_id' => auth()->user()?->getAuthIdentifier(),
                 ]);
         });
     }
