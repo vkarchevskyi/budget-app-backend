@@ -7,6 +7,7 @@ namespace App\Actions\Accounts;
 use App\DTO\Accounts\UpdateAccountDTO;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Throwable;
 
 class UpdateAccountAction
@@ -19,7 +20,7 @@ class UpdateAccountAction
         return DB::transaction(function () use ($id, $updateAccountDTO): Account {
             $account = Account::query()->findOrFail($id);
 
-            // TODO: add policy
+            Gate::authorize('update', [$account]);
 
             $account->update(['name' => $updateAccountDTO->name]);
             return $account;

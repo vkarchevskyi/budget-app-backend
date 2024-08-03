@@ -8,7 +8,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use App\Models\User;
 
-class BudgetPolicy
+class BudgetPolicy extends BasePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -31,7 +31,7 @@ class BudgetPolicy
      */
     public function create(User $user, Budget $budget, Category $category): bool
     {
-        return $category->user_id === $user->id;
+        return $budget->user_id === $user->id && $category->user_id === $user->id;
     }
 
     /**

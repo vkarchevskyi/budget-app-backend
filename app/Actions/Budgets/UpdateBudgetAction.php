@@ -7,6 +7,7 @@ namespace App\Actions\Budgets;
 use App\DTO\Budgets\UpdateBudgetDTO;
 use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Throwable;
 
 class UpdateBudgetAction
@@ -17,9 +18,9 @@ class UpdateBudgetAction
     public function run(int $id, UpdateBudgetDTO $updateBudgetDTO): Budget
     {
         return DB::transaction(function () use ($id, $updateBudgetDTO): Budget {
-            $budget = Budget::query()->findOrFail($id);
+            $budget = Budget::with(['category'])->findOrFail($id);
 
-            // TODO: add policy
+            Gate::authorize('update', [$budget, $budget->category]);
 
             $budget->update(['size' => $updateBudgetDTO->size]);
             return $budget;
