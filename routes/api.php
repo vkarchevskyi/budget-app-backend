@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,10 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::prefix('budgets')->group(function (): void {
         Route::post('create', [BudgetController::class, 'create']);
         Route::patch('{id}', [BudgetController::class, 'update']);
+    });
+
+    Route::prefix('categories')->group(function (): void {
+        Route::post('create', [CategoryController::class, 'create']);
+        Route::patch('{id}', [CategoryController::class, 'update']);
     });
 });

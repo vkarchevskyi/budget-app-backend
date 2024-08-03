@@ -11,7 +11,7 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapInputName(SnakeCaseMapper::class)]
 class CreateCategoryDTO extends Data
 {
-    public function __construct(public int $userId, public string $name)
+    public function __construct(public string $name)
     {
     }
 }

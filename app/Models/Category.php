@@ -61,7 +61,7 @@ class Category extends Model
     #[Override] protected function casts(): array
     {
         return [
-            'month' => 'immutable_date',
+            'month' => 'date',
         ];
     }
 

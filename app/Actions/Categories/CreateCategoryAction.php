@@ -14,12 +14,12 @@ class CreateCategoryAction
     /**
      * @throws Throwable
      */
-    public function run(CreateCategoryDTO $createCategoryDTO): void
+    public function run(CreateCategoryDTO $createCategoryDTO): Category
     {
-        DB::transaction(function () use ($createCategoryDTO): void {
-            Category::query()
+        return DB::transaction(function () use ($createCategoryDTO): Category {
+            return Category::query()
                 ->create([
-                    'user_id' => $createCategoryDTO->userId,
+                    'user_id' => auth()->user()?->getAuthIdentifier(),
                     'name' => $createCategoryDTO->name,
                 ]);
         });

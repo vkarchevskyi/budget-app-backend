@@ -14,15 +14,15 @@ class UpdateCategoryAction
     /**
      * @throws Throwable
      */
-    public function run(int $id, UpdateCategoryDTO $updateCategoryDTO): void
+    public function run(int $id, UpdateCategoryDTO $updateCategoryDTO): Category
     {
-        DB::transaction(function () use ($id, $updateCategoryDTO): void {
-            Category::query()
-                ->where('id', '=', $id)
-                ->update([
-                    'name' => $updateCategoryDTO->name,
-                ]);
+        return DB::transaction(function () use ($id, $updateCategoryDTO): Category {
+            $category = Category::query()->findOrFail($id);
+
+            // TODO: add policy
+
+            $category->update(['name' => $updateCategoryDTO->name]);
+            return $category;
         });
     }
-
 }
