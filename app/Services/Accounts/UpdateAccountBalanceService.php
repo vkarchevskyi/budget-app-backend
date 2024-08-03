@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Accounts;
+namespace App\Services\Accounts;
 
 use App\DTO\Accounts\UpdateAccountBalanceDTO;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
-class UpdateAccountBalanceAction
+class UpdateAccountBalanceService
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(int $id, UpdateAccountBalanceDTO $accountBalanceDTO): void
     {

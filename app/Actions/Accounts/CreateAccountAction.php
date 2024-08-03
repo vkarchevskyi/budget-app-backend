@@ -7,19 +7,21 @@ namespace App\Actions\Accounts;
 use App\DTO\Accounts\CreateAccountDTO;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CreateAccountAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function run(CreateAccountDTO $createAccountDTO): void
+    public function run(CreateAccountDTO $createAccountDTO): Account
     {
-        DB::transaction(function () use ($createAccountDTO): void {
-            Account::query()
+        return DB::transaction(function () use ($createAccountDTO): Account {
+            return Account::query()
                 ->create([
                     'name' => $createAccountDTO->name,
-                    'balance' => $createAccountDTO->balance,
+                    'balance' => 0,
+                    'user_id' => auth()->user()->getAuthIdentifier(),
                 ]);
         });
     }
