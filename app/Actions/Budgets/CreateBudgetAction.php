@@ -8,6 +8,7 @@ use App\DTO\Budgets\CreateBudgetDTO;
 use App\Models\Budget;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Throwable;
 
 class CreateBudgetAction
@@ -18,22 +19,18 @@ class CreateBudgetAction
     public function run(CreateBudgetDTO $createBudgetDTO): Budget
     {
         return DB::transaction(function () use ($createBudgetDTO): Budget {
-            $userOwnsCategory = Category::query()
-                ->where('id', '=', $createBudgetDTO->categoryId)
-                ->where('user_id', '=', auth()->user()?->getAuthIdentifier())
-                ->exists();
+            $category = Category::query()->findOrFail($createBudgetDTO->categoryId);
+            $budget = Budget::query()->make([
+                'size' => $createBudgetDTO->size,
+                'category_id' => $createBudgetDTO->categoryId,
+                'user_id' => auth()->user()?->getAuthIdentifier(),
+                'date' => $createBudgetDTO->date,
+            ]);
 
-            if ($userOwnsCategory) {
-                abort(403);
-            }
+            Gate::authorize('create', [$budget, $category]);
 
-            return Budget::query()
-                ->create([
-                    'size' => $createBudgetDTO->size,
-                    'category_id' => $createBudgetDTO->categoryId,
-                    'user_id' => auth()->user()?->getAuthIdentifier(),
-                    'date' => $createBudgetDTO->date,
-                ]);
+            $budget->save();
+            return $budget;
         });
     }
 }

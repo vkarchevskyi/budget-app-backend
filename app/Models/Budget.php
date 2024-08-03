@@ -9,17 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Override;
 
 /**
  *
  *
  * @property int $id
- * @property string $name
- * @property string|null $description
- * @property float $size
+ * @property int $size
  * @property int $category_id
  * @property int $user_id
- * @property string $date
+ * @property \Illuminate\Support\Carbon $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -34,9 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Budget whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUserId($value)
@@ -59,6 +56,16 @@ class Budget extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * @return array<string, string>
+     */
+    #[Override] protected function casts(): array
+    {
+        return [
+            'date' => 'date',
+        ];
+    }
 
     /**
      * @return BelongsTo<Category, Budget>

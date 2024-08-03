@@ -27,7 +27,7 @@ class CreateBudgetRequest extends FormRequest
         return [
             'size' => ['required', 'integer', 'min:0'],
             'category_id' => ['required', 'integer', 'min:0', 'exists:categories,id'],
-            'date' => ['required', 'date:Y-m-d'],
+            'date' => ['required', 'date:Y-m'],
         ];
     }
 }
