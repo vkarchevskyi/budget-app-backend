@@ -7,11 +7,12 @@ namespace App\Actions\Budgets;
 use App\DTO\Budgets\UpdateBudgetDTO;
 use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UpdateBudgetAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(int $id, UpdateBudgetDTO $updateBudgetDTO): void
     {

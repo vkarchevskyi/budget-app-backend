@@ -7,11 +7,12 @@ namespace App\Actions\Budgets;
 use App\DTO\Budgets\CreateBudgetDTO;
 use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CreateBudgetAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(CreateBudgetDTO $createBudgetDTO): void
     {

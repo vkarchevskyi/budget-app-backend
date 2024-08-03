@@ -7,11 +7,12 @@ namespace App\Actions\Transactions;
 use App\DTO\Transactions\CreateTransactionDTO;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CreateTransactionAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(CreateTransactionDTO $createTransactionDTO): void
     {

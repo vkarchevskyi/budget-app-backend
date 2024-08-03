@@ -7,11 +7,12 @@ namespace App\Actions\Categories;
 use App\DTO\Categories\UpdateCategoryDTO;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UpdateCategoryAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(int $id, UpdateCategoryDTO $updateCategoryDTO): void
     {

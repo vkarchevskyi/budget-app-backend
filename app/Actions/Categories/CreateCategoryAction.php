@@ -7,11 +7,12 @@ namespace App\Actions\Categories;
 use App\DTO\Categories\CreateCategoryDTO;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CreateCategoryAction
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function run(CreateCategoryDTO $createCategoryDTO): void
     {
