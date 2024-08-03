@@ -15,7 +15,7 @@ return new class () extends Migration {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('balance', 2);
+            $table->integer('balance');
             $table->timestamps();
             $table->softDeletes();
         });

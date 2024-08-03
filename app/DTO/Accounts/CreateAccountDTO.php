@@ -10,7 +10,6 @@ class CreateAccountDTO extends Data
 {
     public function __construct(
         public string $name,
-        public float $balance = 0,
     ) {
     }
 }
