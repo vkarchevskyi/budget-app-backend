@@ -1,0 +1,51 @@
+services:
+    db:
+        build: conf/postgres
+        restart: always
+        environment:
+            - POSTGRES_DB=${DB_DATABASE}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_ROOT_PASSWORD=${DB_PASSWORD}
+        expose:
+            - 5432
+        ports:
+            - 5432:5432
+        volumes:
+            - ./conf/postgres/:/docker-entrypoint-initdb.d
+            - ./conf/postgres/db-data:/var/lib/postgresql/data
+
+    backend:
+        build: ..
+        restart: always
+        ports:
+            - 80:80
+        volumes:
+            - ..:/var/www
+        depends_on:
+            - db
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    redis:
+        build: conf/redis
+        restart: always
+        expose:
+            - 6379
+        volumes:
+            - ./conf/redis/db-data:/data
+            - ./conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
+
+    mailpit:
+        image: axllent/mailpit
+        restart: unless-stopped
+        volumes:
+            - ./conf/mailpit/data:/data
+        ports:
+            - 8025:8025
+            - 1025:1025
+        environment:
+            MP_MAX_MESSAGES: 5000
+            MP_DATABASE: /data/mailpit.db
+            MP_SMTP_AUTH_ACCEPT_ANY: 1
+            MP_SMTP_AUTH_ALLOW_INSECURE: 1
