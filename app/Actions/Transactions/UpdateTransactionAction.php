@@ -23,16 +23,9 @@ readonly class UpdateTransactionAction
     {
         return DB::transaction(function () use ($id, $updateTransactionDTO): Transaction {
             /** @var Transaction $transaction */
-            $transaction = Transaction::query()->findOrFail($id);
-
-            $this->gate->authorize('update', [$transaction]);
-
-            $transaction->update([
-                'category_id' => $updateTransactionDTO->categoryId,
-                'account_id' => $updateTransactionDTO->accountId,
-                'price' => $updateTransactionDTO->price,
-            ]);
-
+            $transaction = Transaction::with(['category', 'account'])->findOrFail($id);
+            $this->gate->authorize('update', [$transaction, $transaction->category, $transaction->account]);
+            $transaction->update($updateTransactionDTO->all());
             return $transaction;
         });
     }

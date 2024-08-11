@@ -15,7 +15,7 @@ class TransactionResource extends Data
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly string $description,
+        public readonly ?string $description,
         public readonly int $categoryId,
         public readonly int $userId,
         public readonly int $accountId,

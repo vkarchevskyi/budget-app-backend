@@ -30,7 +30,7 @@ class UpdateTransactionRequest extends FormRequest
             'category_id' => ['sometimes', 'required', 'integer', 'min:0', 'exists:categories,id'],
             'account_id' => ['sometimes', 'required', 'integer', 'min:0', 'exists:accounts,id'],
             'price' => ['sometimes', 'required', 'integer', 'min:0'],
-            'date' => ['sometimes', 'required', 'date'],
+            'date' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }
