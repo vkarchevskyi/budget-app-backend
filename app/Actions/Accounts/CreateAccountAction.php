@@ -6,12 +6,16 @@ namespace App\Actions\Accounts;
 
 use App\DTO\Accounts\CreateAccountDTO;
 use App\Models\Account;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class CreateAccountAction
+readonly class CreateAccountAction
 {
+    public function __construct(protected Gate $gate)
+    {
+    }
+
     /**
      * @throws Throwable
      */
@@ -24,7 +28,7 @@ class CreateAccountAction
                 'user_id' => auth()->user()?->getAuthIdentifier(),
             ]);
 
-            Gate::authorize('create', [$account]);
+            $this->gate->authorize('create', [$account]);
 
             $account->save();
             return $account;

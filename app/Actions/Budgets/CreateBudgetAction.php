@@ -6,12 +6,16 @@ namespace App\Actions\Budgets;
 
 use App\DTO\Budgets\CreateBudgetDTO;
 use App\Models\Budget;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class CreateBudgetAction
+readonly class CreateBudgetAction
 {
+    public function __construct(protected Gate $gate)
+    {
+    }
+
     /**
      * @throws Throwable
      */
@@ -26,7 +30,7 @@ class CreateBudgetAction
                 'date' => $createBudgetDTO->date,
             ])->load(['category']);
 
-            Gate::authorize('create', [$budget, $budget->category]);
+            $this->gate->authorize('create', [$budget, $budget->category]);
 
             $budget->save();
             return $budget;

@@ -6,21 +6,26 @@ namespace App\Actions\Categories;
 
 use App\DTO\Categories\UpdateCategoryDTO;
 use App\Models\Category;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class UpdateCategoryAction
+readonly class UpdateCategoryAction
 {
+    public function __construct(protected Gate $gate)
+    {
+    }
+
     /**
      * @throws Throwable
      */
     public function run(int $id, UpdateCategoryDTO $updateCategoryDTO): Category
     {
         return DB::transaction(function () use ($id, $updateCategoryDTO): Category {
+            /** @var Category $category */
             $category = Category::query()->findOrFail($id);
 
-            Gate::authorize('update', [$category]);
+            $this->gate->authorize('update', [$category]);
 
             $category->update(['name' => $updateCategoryDTO->name]);
             return $category;

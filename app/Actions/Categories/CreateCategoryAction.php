@@ -6,12 +6,16 @@ namespace App\Actions\Categories;
 
 use App\DTO\Categories\CreateCategoryDTO;
 use App\Models\Category;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class CreateCategoryAction
+readonly class CreateCategoryAction
 {
+    public function __construct(protected Gate $gate)
+    {
+    }
+
     /**
      * @throws Throwable
      */
@@ -23,7 +27,7 @@ class CreateCategoryAction
                 'name' => $createCategoryDTO->name,
             ]);
 
-            Gate::authorize('create', [$category]);
+            $this->gate->authorize('create', [$category]);
 
             $category->save();
             return $category;
