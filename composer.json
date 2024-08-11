@@ -68,6 +68,10 @@
         "phpdoc": [
             "@php artisan ide-helper:models",
             "./vendor/bin/pint app"
+        ],
+        "lint": [
+            "composer pint-fix",
+            "composer larastan"
         ]
     },
     "extra": {
