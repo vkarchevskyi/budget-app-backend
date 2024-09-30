@@ -10,6 +10,7 @@ class CreateAccountDTO extends Data
 {
     public function __construct(
         public string $name,
+        public int $userId,
     ) {
     }
 }
