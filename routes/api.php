@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use App\Models\User;
@@ -15,23 +14,24 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
         return $request->user();
     });
 
-    Route::prefix('accounts')->group(function (): void {
-        Route::post('create', [AccountController::class, 'create']);
-        Route::patch('{id}', [AccountController::class, 'update']);
-    });
+    Route::prefix('accounts')
+        ->name('accounts')
+        ->group(function (): void {
+            Route::post('', [AccountController::class, 'store']);
+            Route::patch('{account}', [AccountController::class, 'update']);
+        });
 
-    Route::prefix('budgets')->group(function (): void {
-        Route::post('create', [BudgetController::class, 'create']);
-        Route::patch('{id}', [BudgetController::class, 'update']);
-    });
+    Route::prefix('categories')
+        ->name('categories')
+        ->group(function (): void {
+            Route::post('', [CategoryController::class, 'store']);
+            Route::patch('{id}', [CategoryController::class, 'update']);
+        });
 
-    Route::prefix('categories')->group(function (): void {
-        Route::post('create', [CategoryController::class, 'create']);
-        Route::patch('{id}', [CategoryController::class, 'update']);
-    });
-
-    Route::prefix('transactions')->group(function (): void {
-        Route::post('create', [TransactionController::class, 'create']);
-        Route::patch('{id}', [TransactionController::class, 'update']);
-    });
+    Route::prefix('transactions')
+        ->name('transactions')
+        ->group(function (): void {
+            Route::post('', [TransactionController::class, 'store']);
+            Route::patch('{id}', [TransactionController::class, 'update']);
+        });
 });
