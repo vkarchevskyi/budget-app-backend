@@ -7,21 +7,42 @@ namespace App\Http\Controllers;
 use App\Actions\Accounts\CreateAccountAction;
 use App\Actions\Accounts\UpdateAccountAction;
 use App\DTO\Accounts\CreateAccountDTO;
+use App\DTO\Accounts\IndexAccountDTO;
 use App\DTO\Accounts\UpdateAccountDTO;
 use App\Http\Requests\Accounts\CreateAccountRequest;
+use App\Http\Requests\Accounts\IndexAccountRequest;
 use App\Http\Requests\Accounts\UpdateAccountRequest;
 use App\Models\Account;
 use App\Resources\Accounts\AccountResource;
+use App\ViewModels\PaginateAccountsViewModel;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Gate;
-use Throwable;
 
 class AccountController extends Controller
 {
     /**
-     * @throws Throwable
+     * @param IndexAccountRequest $request
+     * @param PaginateAccountsViewModel $paginateAccountsViewModel
+     * @return LengthAwarePaginator<AccountResource>
      */
-    public function store(CreateAccountRequest $request, CreateAccountAction $createAccountAction): AccountResource
-    {
+    public function index(
+        IndexAccountRequest $request,
+        PaginateAccountsViewModel $paginateAccountsViewModel
+    ): LengthAwarePaginator {
+        Gate::authorize('viewAny', Account::class);
+
+        $data = IndexAccountDTO::from([
+            ...$request->all(),
+            'user_id' => auth()->id(),
+        ]);
+
+        return $paginateAccountsViewModel->get($data);
+    }
+
+    public function store(
+        CreateAccountRequest $request,
+        CreateAccountAction $createAccountAction
+    ): AccountResource {
         Gate::authorize('create', Account::class);
 
         $data = CreateAccountDTO::from([
@@ -32,9 +53,6 @@ class AccountController extends Controller
         return AccountResource::from($createAccountAction->run($data));
     }
 
-    /**
-     * @throws Throwable
-     */
     public function update(
         Account $account,
         UpdateAccountRequest $request,
@@ -44,6 +62,8 @@ class AccountController extends Controller
 
         $data = UpdateAccountDTO::from($request);
 
-        return AccountResource::from($updateAccountAction->run($account, $data));
+        return AccountResource::from(
+            $updateAccountAction->run($account, $data)
+        );
     }
 }

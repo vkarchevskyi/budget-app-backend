@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::prefix('accounts')
         ->name('accounts')
         ->group(function (): void {
+            Route::get('', [AccountController::class, 'index']);
             Route::post('', [AccountController::class, 'store']);
             Route::patch('{account}', [AccountController::class, 'update']);
         });
