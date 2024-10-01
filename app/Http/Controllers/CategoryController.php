@@ -78,7 +78,7 @@ class CategoryController extends Controller
         );
     }
 
-    public function delete(Category $category, DeleteCategoryAction $deleteCategoryAction): JsonResponse
+    public function destroy(Category $category, DeleteCategoryAction $deleteCategoryAction): JsonResponse
     {
         Gate::authorize('delete', $category);
 
