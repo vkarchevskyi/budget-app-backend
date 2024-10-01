@@ -34,7 +34,7 @@ readonly class UpdateAccountAction
     private function validate(UpdateAccountDTO $updateAccountDTO): void
     {
         Validator::make($updateAccountDTO->all(), [
-            'name' => 'sometimes|required|string|max:255',
+            'name' => 'sometimes|required|string|min:1|max:255',
         ])->validate();
     }
 }
