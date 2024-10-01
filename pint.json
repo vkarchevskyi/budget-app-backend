@@ -5,5 +5,8 @@
         "no_unused_imports": true,
         "ordered_imports": true,
         "global_namespace_import": true
-    }
+    },
+    "exclude": [
+        "tests"
+    ]
 }

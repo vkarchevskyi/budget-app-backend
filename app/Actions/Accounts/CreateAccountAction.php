@@ -7,13 +7,9 @@ namespace App\Actions\Accounts;
 use App\DTO\Accounts\CreateAccountDTO;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 
 readonly class CreateAccountAction
 {
-    /**
-     * @throws Throwable
-     */
     public function run(CreateAccountDTO $createAccountDTO): Account
     {
         return DB::transaction(

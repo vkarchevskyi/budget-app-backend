@@ -7,13 +7,9 @@ namespace App\Actions\Accounts;
 use App\DTO\Accounts\UpdateAccountDTO;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 
 readonly class UpdateAccountAction
 {
-    /**
-     * @throws Throwable
-     */
     public function run(Account $account, UpdateAccountDTO $updateAccountDTO): Account
     {
         return DB::transaction(
