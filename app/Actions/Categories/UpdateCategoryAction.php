@@ -6,29 +6,35 @@ namespace App\Actions\Categories;
 
 use App\DTO\Categories\UpdateCategoryDTO;
 use App\Models\Category;
-use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Throwable;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 readonly class UpdateCategoryAction
 {
-    public function __construct(protected Gate $gate)
+    /**
+     * @throws ValidationException
+     */
+    public function run(Category $category, UpdateCategoryDTO $updateCategoryDTO): Category
     {
+        $this->validate($updateCategoryDTO);
+
+        return DB::transaction(
+            function () use ($category, $updateCategoryDTO): Category {
+                $category->update($updateCategoryDTO->all());
+
+                return $category;
+            }
+        );
     }
 
     /**
-     * @throws Throwable
+     * @throws ValidationException
      */
-    public function run(int $id, UpdateCategoryDTO $updateCategoryDTO): Category
+    private function validate(UpdateCategoryDTO $updateCategoryDTO): void
     {
-        return DB::transaction(function () use ($id, $updateCategoryDTO): Category {
-            /** @var Category $category */
-            $category = Category::query()->findOrFail($id);
-
-            $this->gate->authorize('update', [$category]);
-
-            $category->update(['name' => $updateCategoryDTO->name]);
-            return $category;
-        });
+        Validator::make($updateCategoryDTO->all(), [
+            'name' => 'sometimes|required|string|min:1|max:255',
+        ])->validate();
     }
 }

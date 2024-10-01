@@ -6,31 +6,35 @@ namespace App\Actions\Categories;
 
 use App\DTO\Categories\CreateCategoryDTO;
 use App\Models\Category;
-use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Throwable;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 readonly class CreateCategoryAction
 {
-    public function __construct(protected Gate $gate)
-    {
-    }
-
     /**
-     * @throws Throwable
+     * @throws ValidationException
      */
     public function run(CreateCategoryDTO $createCategoryDTO): Category
     {
-        return DB::transaction(function () use ($createCategoryDTO): Category {
-            $category = Category::query()->make([
-                'user_id' => auth()->user()?->getAuthIdentifier(),
+        $this->validate($createCategoryDTO);
+
+        return DB::transaction(
+            fn (): Category => Category::query()->create([
                 'name' => $createCategoryDTO->name,
-            ]);
+                'user_id' => $createCategoryDTO->userId,
+            ])
+        );
+    }
 
-            $this->gate->authorize('create', [$category]);
-
-            $category->save();
-            return $category;
-        });
+    /**
+     * @throws ValidationException
+     */
+    private function validate(CreateCategoryDTO $createCategoryDTO): void
+    {
+        Validator::make($createCategoryDTO->all(), [
+            'name' => 'required|string|min:1|max:255',
+            'user_id' => 'required|integer|min:1|exists:users,id',
+        ])->validate();
     }
 }
