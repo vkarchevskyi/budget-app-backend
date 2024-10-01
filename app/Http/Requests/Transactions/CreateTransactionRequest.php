@@ -30,7 +30,7 @@ class CreateTransactionRequest extends FormRequest
             'category_id' => 'required|integer|min:0|exists:categories,id',
             'account_id' => 'required|integer|min:0|exists:accounts,id',
             'price' => 'required|integer|min:0',
-            'date' => 'required|date_format:Y-m-d H:i:s',
+            'date' => 'required|date_format:' . DATE_ATOM,
         ];
     }
 }
