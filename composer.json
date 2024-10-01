@@ -55,16 +55,16 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "pint-fix": [
-            "./vendor/bin/pint"
+            "XDEBUG_MODE=off ./vendor/bin/pint"
         ],
         "pint-lint": [
-            "./vendor/bin/pint --test"
+            "XDEBUG_MODE=off ./vendor/bin/pint --test"
         ],
         "phpstan": [
-            "./vendor/bin/phpstan analyze --memory-limit=2G"
+            "XDEBUG_MODE=off ./vendor/bin/phpstan analyze --memory-limit=2G"
         ],
         "larastan": [
-            "./vendor/bin/phpstan analyze --memory-limit=2G"
+            "XDEBUG_MODE=off ./vendor/bin/phpstan analyze --memory-limit=2G"
         ],
         "phpdoc": [
             "@php artisan ide-helper:models",
