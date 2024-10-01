@@ -25,12 +25,12 @@ class UpdateTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['sometimes', 'required', 'string', 'max:255'],
-            'description' => ['sometimes', 'nullable', 'string', 'max:255'],
-            'category_id' => ['sometimes', 'required', 'integer', 'min:0', 'exists:categories,id'],
-            'account_id' => ['sometimes', 'required', 'integer', 'min:0', 'exists:accounts,id'],
-            'price' => ['sometimes', 'required', 'integer', 'min:0'],
-            'date' => ['sometimes', 'required', 'date_format:Y-m-d H:i:s'],
+            'name' => 'sometimes|required|string|min:1|max:255',
+            'description' => 'sometimes|nullable|string|max:255',
+            'category_id' => 'sometimes|required|integer|min:0|exists:categories,id',
+            'account_id' => 'sometimes|required|integer|min:0|exists:accounts,id',
+            'price' => 'sometimes|required|integer|min:0',
+            'date' => 'sometimes|required|date_format:Y-m-d H:i:s',
         ];
     }
 }
