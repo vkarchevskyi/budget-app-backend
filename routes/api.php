@@ -27,8 +27,11 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::prefix('categories')
         ->name('categories')
         ->group(function (): void {
+            Route::get('', [CategoryController::class, 'index']);
             Route::post('', [CategoryController::class, 'store']);
-            Route::patch('{id}', [CategoryController::class, 'update']);
+            Route::get('{category}', [CategoryController::class, 'show']);
+            Route::patch('{category}', [CategoryController::class, 'update']);
+            Route::delete('{category}', [CategoryController::class, 'delete']);
         });
 
     Route::prefix('transactions')
