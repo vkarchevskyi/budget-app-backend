@@ -10,7 +10,7 @@ use App\Resources\Accounts\AccountResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\LaravelData\Optional;
 
-class PaginateAccountsViewModel
+readonly class PaginateAccountsViewModel
 {
     /**
      * @param IndexAccountDTO $paginateDTO
