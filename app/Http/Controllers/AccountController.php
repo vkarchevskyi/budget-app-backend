@@ -78,7 +78,7 @@ class AccountController extends Controller
         );
     }
 
-    public function delete(Account $account, DeleteAccountAction $deleteAccountAction): JsonResponse
+    public function destroy(Account $account, DeleteAccountAction $deleteAccountAction): JsonResponse
     {
         Gate::authorize('delete', $account);
 

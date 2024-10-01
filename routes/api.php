@@ -21,7 +21,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
             Route::post('', [AccountController::class, 'store']);
             Route::get('{account}', [AccountController::class, 'show']);
             Route::patch('{account}', [AccountController::class, 'update']);
-            Route::delete('{account}', [AccountController::class, 'delete']);
+            Route::delete('{account}', [AccountController::class, 'destroy']);
         });
 
     Route::prefix('categories')
@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
             Route::post('', [CategoryController::class, 'store']);
             Route::get('{category}', [CategoryController::class, 'show']);
             Route::patch('{category}', [CategoryController::class, 'update']);
-            Route::delete('{category}', [CategoryController::class, 'delete']);
+            Route::delete('{category}', [CategoryController::class, 'destroy']);
         });
 
     Route::prefix('transactions')
