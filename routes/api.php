@@ -19,7 +19,9 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
         ->group(function (): void {
             Route::get('', [AccountController::class, 'index']);
             Route::post('', [AccountController::class, 'store']);
+            Route::get('{account}', [AccountController::class, 'show']);
             Route::patch('{account}', [AccountController::class, 'update']);
+            Route::delete('{account}', [AccountController::class, 'delete']);
         });
 
     Route::prefix('categories')
