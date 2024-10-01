@@ -11,6 +11,6 @@ readonly class DeleteAccountAction
 {
     public function run(Account $account): bool
     {
-        return DB::transaction(fn (): bool => $account->delete());
+        return DB::transaction(fn (): bool => (bool) $account->delete());
     }
 }
