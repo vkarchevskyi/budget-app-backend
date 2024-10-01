@@ -4,7 +4,7 @@ use App\Actions\Accounts\CreateAccountAction;
 use App\DTO\Accounts\CreateAccountDTO;
 use App\Models\Account;
 use App\Models\User;
-use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 
 test('can create a new account', function () {
     $user = User::factory()->create();
@@ -40,7 +40,7 @@ test('cannot create a new account for non existed user', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(QueryException::class);
+})->throws(ValidationException::class);
 
 test('cannot create a new account without a user_id', function () {
     $createAccountDTO = CreateAccountDTO::from([
@@ -48,7 +48,7 @@ test('cannot create a new account without a user_id', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(Error::class);
+})->throws(ValidationException::class);
 
 test('cannot create a new account without a name', function () {
     $createAccountDTO = CreateAccountDTO::from([
@@ -56,4 +56,15 @@ test('cannot create a new account without a name', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(Error::class);
+})->throws(ValidationException::class);
+
+test('cannot create a new account with very long name', function () {
+    $user = User::factory()->create();
+
+    $createAccountDTO = CreateAccountDTO::from([
+        'name' => str_repeat('a', 255 + 1),
+        'user_id' => $user->id,
+    ]);
+
+    (new CreateAccountAction())->run($createAccountDTO);
+})->throws(ValidationException::class);

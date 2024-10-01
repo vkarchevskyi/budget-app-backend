@@ -34,7 +34,7 @@ readonly class CreateAccountAction
     private function validate(CreateAccountDTO $createAccountDTO): void
     {
         Validator::make($createAccountDTO->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:1|max:255',
             'user_id' => 'required|integer|min:1|exists:users,id',
         ])->validate();
     }
