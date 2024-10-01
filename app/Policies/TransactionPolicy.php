@@ -9,12 +9,12 @@ use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\User;
 
-class TransactionPolicy extends BasePolicy
+class TransactionPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
@@ -30,9 +30,9 @@ class TransactionPolicy extends BasePolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Transaction $transaction, Category $category, Account $account): bool
+    public function create(User $user, Category $category, Account $account): bool
     {
-        return $this->isUniqueIds($user->id, $transaction->user_id, $account->user_id, $category->user_id);
+        return $user->id === $account->user_id && $user->id === $category->user_id;
     }
 
     /**
@@ -40,7 +40,9 @@ class TransactionPolicy extends BasePolicy
      */
     public function update(User $user, Transaction $transaction, Category $category, Account $account): bool
     {
-        return $this->isUniqueIds($user->id, $transaction->user_id, $account->user_id, $category->user_id);
+        return $user->id === $transaction->user_id
+            || $user->id === $account->user_id
+            || $user->id === $category->user_id;
     }
 
     /**
