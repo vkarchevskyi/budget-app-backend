@@ -37,7 +37,10 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::prefix('transactions')
         ->name('transactions')
         ->group(function (): void {
+            Route::get('', [TransactionController::class, 'index']);
             Route::post('', [TransactionController::class, 'store']);
-            Route::patch('{id}', [TransactionController::class, 'update']);
+            Route::get('{transaction}', [TransactionController::class, 'show']);
+            Route::patch('{transaction}', [TransactionController::class, 'update']);
+            Route::delete('{transaction}', [TransactionController::class, 'destroy']);
         });
 });
