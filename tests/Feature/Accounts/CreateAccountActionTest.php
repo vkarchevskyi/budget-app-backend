@@ -24,13 +24,26 @@ test('can create a new account', function () {
         ->and($account->balance)
         ->toBe(0)
         ->and($account->user_id)
-        ->toBe(1);
+        ->toBe($user->id);
 
     $this->assertDatabaseHas('accounts', [
         'name' => 'Cash',
         'balance' => 0,
         'user_id' => $user->id,
     ]);
+});
+
+test('can create a new account with a maximum name length', function () {
+    $user = User::factory()->create();
+
+    $createAccountDTO = CreateAccountDTO::from([
+        'name' => str_repeat('a', 255),
+        'user_id' => $user->id,
+    ]);
+
+    $account = (new CreateAccountAction())->run($createAccountDTO);
+
+    expect($account->name)->toBe(str_repeat('a', 255));
 });
 
 test('cannot create a new account for non existed user', function () {
@@ -48,7 +61,7 @@ test('cannot create a new account without a user_id', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(ValidationException::class);
+})->throws(ValidationException::class, 'The user id field is required.');
 
 test('cannot create a new account without a name', function () {
     $createAccountDTO = CreateAccountDTO::from([
@@ -56,7 +69,7 @@ test('cannot create a new account without a name', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(ValidationException::class);
+})->throws(ValidationException::class, 'The name field is required.');
 
 test('cannot create a new account with very long name', function () {
     $user = User::factory()->create();
@@ -67,4 +80,4 @@ test('cannot create a new account with very long name', function () {
     ]);
 
     (new CreateAccountAction())->run($createAccountDTO);
-})->throws(ValidationException::class);
+})->throws(ValidationException::class, 'The name field must not be greater than 255 characters.');
