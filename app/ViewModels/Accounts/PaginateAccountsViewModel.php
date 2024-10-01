@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ViewModels;
+namespace App\ViewModels\Accounts;
 
 use App\DTO\Accounts\IndexAccountDTO;
 use App\Models\Account;
