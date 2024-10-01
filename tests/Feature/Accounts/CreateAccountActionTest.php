@@ -4,8 +4,9 @@ use App\Actions\Accounts\CreateAccountAction;
 use App\DTO\Accounts\CreateAccountDTO;
 use App\Models\Account;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 
-test('can create an new account', function () {
+test('can create a new account', function () {
     $user = User::factory()->create();
 
     $createAccountDTO = CreateAccountDTO::from([
@@ -31,3 +32,28 @@ test('can create an new account', function () {
         'user_id' => $user->id,
     ]);
 });
+
+test('cannot create a new account for non existed user', function () {
+    $createAccountDTO = CreateAccountDTO::from([
+        'name' => 'Cash',
+        'user_id' => 1
+    ]);
+
+    (new CreateAccountAction())->run($createAccountDTO);
+})->throws(QueryException::class);
+
+test('cannot create a new account without a user_id', function () {
+    $createAccountDTO = CreateAccountDTO::from([
+        'name' => 'Cash',
+    ]);
+
+    (new CreateAccountAction())->run($createAccountDTO);
+})->throws(Error::class);
+
+test('cannot create a new account without a name', function () {
+    $createAccountDTO = CreateAccountDTO::from([
+        'user_id' => 1,
+    ]);
+
+    (new CreateAccountAction())->run($createAccountDTO);
+})->throws(Error::class);
