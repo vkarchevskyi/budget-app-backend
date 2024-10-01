@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\ViewModels;
+namespace App\ViewModels\Accounts;
 
 use App\Models\Account;
 use App\Resources\Accounts\AccountResource;
 
-class GetAccountViewModel
+readonly class GetAccountViewModel
 {
     public function get(Account $account): AccountResource
     {

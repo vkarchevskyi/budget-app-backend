@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ViewModels;
+namespace App\ViewModels\Accounts;
 
 use App\DTO\Accounts\IndexAccountDTO;
 use App\Models\Account;
@@ -10,7 +10,7 @@ use App\Resources\Accounts\AccountResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\LaravelData\Optional;
 
-class PaginateAccountsViewModel
+readonly class PaginateAccountsViewModel
 {
     /**
      * @param IndexAccountDTO $paginateDTO
