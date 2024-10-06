@@ -22,7 +22,6 @@ readonly class CreateAccountAction
         return DB::transaction(
             fn (): Account => Account::query()->create([
                 'name' => $createAccountDTO->name,
-                'balance' => 0,
                 'user_id' => $createAccountDTO->userId,
             ])
         );

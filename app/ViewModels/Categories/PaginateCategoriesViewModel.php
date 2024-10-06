@@ -17,7 +17,7 @@ readonly class PaginateCategoriesViewModel
         $query = Category::query();
 
         if (!($paginateDTO->search instanceof Optional)) {
-            $query->where("name", "like", "%" . $paginateDTO->search . "%");
+            $query->where('name', 'ilike', "%$paginateDTO->search%");
         }
 
         $query->where("user_id", $paginateDTO->userId)

@@ -7,7 +7,7 @@ namespace App\Http\Requests\Transactions;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTransactionRequest extends FormRequest
+class IndexTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,11 @@ class CreateTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:1|max:255',
-            'description' => 'nullable|string|max:255',
-            'category_id' => 'required|integer|min:0|exists:categories,id',
-            'account_id' => 'required|integer|min:0|exists:accounts,id',
-            'price' => 'required|integer|min:0',
-            'date' => 'required|date_format:' . DATE_ATOM,
+            'page' => 'sometimes|integer|min:1',
+            'per_page' => 'sometimes|integer|min:1|max:100',
+            'search' => 'sometimes|string|max:255',
+            'sort_by' => 'sometimes|in:id,name,created_at,balance',
+            'sort_order' => 'sometimes|in:asc,desc',
         ];
     }
 }

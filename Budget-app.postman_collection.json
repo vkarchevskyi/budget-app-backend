@@ -1,0 +1,1125 @@
+{
+	"info": {
+		"_postman_id": "fd5feccc-1d3c-4a2f-8bfc-498eeefb313d",
+		"name": "Budget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16698510"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "localhost:3000",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION",
+									"value": "PHPSTORM",
+									"disabled": true
+								},
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Test User",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/forgot-password",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/verify-email",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/forgot-password",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "dedc06d7236efc27f66b20fd3341319953f32e244dfc43ef6de4bda77d6ad755",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/reset-password",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Verification Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/email/verification-notification",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"email",
+								"verification-notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Index Accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/accounts?per_page=10&page=1&name=test",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/accounts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/accounts/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "New Name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/accounts/2",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/accounts/2",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Index Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/categories",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test Category",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/categories",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/categories/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Categories",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "New Category",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/categories/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/categories/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Index Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/transactions",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Steam game",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "account_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2222",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-08-11T18:00:00+02:00",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/transactions",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Transaction",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/transactions/7",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transaction",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-08-11T18:00:00+03:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/transactions/7",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{domain}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/transactions/7",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CSRF-Cookie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/sanctum/csrf-cookie",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"sanctum",
+						"csrf-cookie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{xsrf-cookie}}",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": "{{domain}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/api/user",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.sendRequest({",
+					"    url: 'http://localhost/sanctum/csrf-cookie',",
+					"    method: 'GET',",
+					"}, function (error, response, { cookies }) {",
+					"    if (!error) {",
+					"        console.log(cookies);",
+					"        pm.environment.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))",
+					"    }",
+					"})",
+					"",
+					"// Check if XDEBUG_SESSION is already set",
+					"if (!pm.request.headers.has(\"XDEBUG_SESSION\")) {",
+					"    // If not set, add it to the request headers",
+					"    pm.request.headers.add({",
+					"        key: \"XDEBUG_SESSION\",",
+					"        value: \"PHPSTORM\"",
+					"    });",
+					"}",
+					"",
+					"// Check if XDEBUG_SESSION is already set",
+					"if (!pm.request.headers.has(\"XDEBUG_SESSION_START\")) {",
+					"    // If not set, add it to the request headers",
+					"    pm.request.headers.add({",
+					"        key: \"XDEBUG_SESSION_START\",",
+					"        value: \"PHPSTORM\"",
+					"    });",
+					"}",
+					"",
+					"console.log(pm);",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}

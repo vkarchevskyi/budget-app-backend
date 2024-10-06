@@ -8,6 +8,7 @@ use Database\Factories\AccountFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,18 +16,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property string $name
- * @property int $balance
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int $user_id
+ * @property-read int $balance
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Transaction> $transactions
+ * @property-read int|null $transactions_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Account query()
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereBalance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereId($value)
@@ -46,6 +48,13 @@ class Account extends Model
     /**
      * @var string[]
      */
+    protected $appends = [
+        'balance'
+    ];
+
+    /**
+     * @var string[]
+     */
     protected $guarded = [
         'id',
         'created_at',
@@ -59,5 +68,18 @@ class Account extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return HasMany<Transaction>
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function getBalanceAttribute(): int
+    {
+        return $this->transactions()->sum('price');
     }
 }

@@ -6,27 +6,42 @@ namespace App\Actions\Transactions;
 
 use App\DTO\Transactions\UpdateTransactionDTO;
 use App\Models\Transaction;
-use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
-use Throwable;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 readonly class UpdateTransactionAction
 {
-    public function __construct(protected Gate $gate)
+    /**
+     * @throws ValidationException
+     */
+    public function run(Transaction $transaction, UpdateTransactionDTO $updateTransactionDTO): Transaction
     {
+        $this->validate($updateTransactionDTO);
+
+        return DB::transaction(
+            function () use ($transaction, $updateTransactionDTO): Transaction {
+                $updateTransactionDTO->date = $updateTransactionDTO->date->utc();
+
+                $transaction->update($updateTransactionDTO->all());
+
+                return $transaction;
+            }
+        );
     }
 
     /**
-     * @throws Throwable
+     * @throws ValidationException
      */
-    public function run(int $id, UpdateTransactionDTO $updateTransactionDTO): Transaction
+    private function validate(UpdateTransactionDTO $updateTransactionDTO): void
     {
-        return DB::transaction(function () use ($id, $updateTransactionDTO): Transaction {
-            /** @var Transaction $transaction */
-            $transaction = Transaction::with(['category', 'account'])->findOrFail($id);
-            $this->gate->authorize('update', [$transaction, $transaction->category, $transaction->account]);
-            $transaction->update($updateTransactionDTO->all());
-            return $transaction;
-        });
+        Validator::make($updateTransactionDTO->toArray(), [
+            'name' => 'sometimes|required|string|min:1|max:255',
+            'description' => 'sometimes|nullable|string|max:255',
+            'category_id' => 'sometimes|required|integer|min:0|exists:categories,id',
+            'account_id' => 'sometimes|required|integer|min:0|exists:accounts,id',
+            'price' => 'sometimes|required|integer|min:0',
+            'date' => 'sometimes|required|date_format:' . DATE_ATOM,
+        ])->validate();
     }
 }

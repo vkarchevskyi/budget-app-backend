@@ -15,14 +15,12 @@ use Spatie\LaravelData\Optional;
 #[MapName(SnakeCaseMapper::class)]
 class CreateTransactionDTO extends Data
 {
-    public function __construct(
-        public string $name,
-        public string|Optional $description,
-        public int $categoryId,
-        public int $accountId,
-        public float $price,
-        #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d H:i:s')]
-        public Carbon $date,
-    ) {
-    }
+    public string $name;
+    public string|Optional $description;
+    public int $categoryId;
+    public int $accountId;
+    public int $userId;
+    public float $price;
+    #[WithCast(DateTimeInterfaceCast::class, format: DATE_ATOM)]
+    public Carbon $date;
 }
