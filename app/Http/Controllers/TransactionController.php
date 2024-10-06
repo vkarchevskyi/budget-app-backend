@@ -76,12 +76,12 @@ class TransactionController extends Controller
         UpdateTransactionRequest $request,
         UpdateTransactionAction $updateTransactionAction
     ): TransactionResource {
-        Gate::authorize('update', $transaction);
+        $transaction->loadMissing(['category', 'account']);
 
-        $data = UpdateTransactionDTO::from($request);
+        Gate::authorize('update', [$transaction, $transaction->category, $transaction->account]);
 
         return TransactionResource::from(
-            $updateTransactionAction->run($transaction, $data)
+            $updateTransactionAction->run($transaction, UpdateTransactionDTO::from($request))
         );
     }
 
