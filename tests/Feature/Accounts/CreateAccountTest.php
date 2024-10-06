@@ -4,10 +4,12 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 
-test('can create a new account', function () {
-    $user = User::factory()->create();
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
 
-    $response = $this->actingAs($user)->postJson('/api/accounts', [
+test('can create a new account', function () {
+    $response = $this->actingAs($this->user)->postJson('/api/accounts', [
         'name' => 'Cash',
     ]);
 
@@ -24,10 +26,9 @@ test('can create a new account', function () {
 });
 
 test('can create a new account with a maximum name length', function () {
-    $user = User::factory()->create();
     $name = Str::repeat('a', 255);
 
-    $response = $this->actingAs($user)->postJson('/api/accounts', [
+    $response = $this->actingAs($this->user)->postJson('/api/accounts', [
         'name' => $name,
     ]);
 
@@ -52,8 +53,7 @@ test('cannot create a new account for non unauthenticated user', function () {
 });
 
 test('cannot create a new account without a name', function () {
-    $user = User::factory()->create();
-    $response = $this->actingAs($user)->postJson('/api/accounts', []);
+    $response = $this->actingAs($this->user)->postJson('/api/accounts', []);
 
     $response
         ->assertStatus(422)
@@ -63,10 +63,9 @@ test('cannot create a new account without a name', function () {
 });
 
 test('cannot create a new account with very long name', function () {
-    $user = User::factory()->create();
     $name = Str::repeat('a', 255 + 1);
 
-    $response = $this->actingAs($user)->postJson('/api/accounts', [
+    $response = $this->actingAs($this->user)->postJson('/api/accounts', [
         'name' => $name,
     ]);
 
