@@ -5,11 +5,14 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 
-test('can update an account name', function () {
-    $user = User::factory()->create();
-    $account = Account::factory()->state(['user_id' => $user->id])->create();
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
 
-    $response = $this->actingAs($user)->patchJson("/api/accounts/$account->id", [
+test('can update an account name', function () {
+    $account = Account::factory()->state(['user_id' => $this->user->id])->create();
+
+    $response = $this->actingAs($this->user)->patchJson("/api/accounts/$account->id", [
         'name' => 'Card'
     ]);
 
@@ -30,11 +33,16 @@ test('can update an account name', function () {
     ]);
 });
 
+test('cannot update a non-existed account', function () {
+    $response = $this->actingAs($this->user)->patchJson("/api/accounts/999");
+
+    $response->assertNotFound();
+});
+
 test('cannot update an account of other user', function () {
-    $user = User::factory()->create();
     $account = Account::factory()->create();
 
-    $response = $this->actingAs($user)->patchJson("/api/accounts/$account->id", [
+    $response = $this->actingAs($this->user)->patchJson("/api/accounts/$account->id", [
         'name' => 'Card'
     ]);
 
@@ -52,13 +60,12 @@ test('unauthenticated user cannot update and account', function () {
 });
 
 test('cannot update an account with a very long name', function () {
-    $user = User::factory()->create();
     $account = Account::factory()->state([
-        'user_id' => $user->id,
+        'user_id' => $this->user->id,
         'name' => 'Valid Name'
     ])->create();
 
-    $response = $this->actingAs($user)->patchJson("/api/accounts/$account->id", [
+    $response = $this->actingAs($this->user)->patchJson("/api/accounts/$account->id", [
         'name' => Str::repeat('a', 255 + 1),
     ]);
 
@@ -75,10 +82,9 @@ test('cannot update an account with a very long name', function () {
 });
 
 test('can update an account without changing the name', function () {
-    $user = User::factory()->create();
-    $account = Account::factory()->state(['user_id' => $user->id])->create();
+    $account = Account::factory()->state(['user_id' => $this->user->id])->create();
 
-    $response = $this->actingAs($user)->patchJson("/api/accounts/$account->id", []);
+    $response = $this->actingAs($this->user)->patchJson("/api/accounts/$account->id", []);
 
     $response
         ->assertSuccessful()
