@@ -21,6 +21,8 @@ readonly class CreateTransactionAction
 
         return DB::transaction(
             function () use ($createTransactionDTO): Transaction {
+                $createTransactionDTO->date = $createTransactionDTO->date->utc();
+
                 return Transaction::query()->create($createTransactionDTO->all());
             }
         );

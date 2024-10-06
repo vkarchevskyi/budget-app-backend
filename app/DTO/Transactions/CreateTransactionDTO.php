@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DTO\Transactions;
 
-use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\WithCast;
@@ -22,6 +21,6 @@ class CreateTransactionDTO extends Data
     public int $accountId;
     public int $userId;
     public float $price;
-    #[WithCast(DateTimeInterfaceCast::class, format: DateTimeInterface::ISO8601_EXPANDED)]
+    #[WithCast(DateTimeInterfaceCast::class, format: DATE_ATOM)]
     public Carbon $date;
 }
