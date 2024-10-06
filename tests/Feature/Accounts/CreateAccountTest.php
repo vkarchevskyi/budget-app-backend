@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 test('can create a new account', function () {
@@ -11,6 +12,7 @@ test('can create a new account', function () {
     ]);
 
     $response
+        ->assertSuccessful()
         ->assertJson(fn (AssertableJson $json) => $json
             ->where('id', 1)
             ->where('name', 'Cash')
@@ -23,20 +25,22 @@ test('can create a new account', function () {
 
 test('can create a new account with a maximum name length', function () {
     $user = User::factory()->create();
-    $name = str_repeat('a', 255);
+    $name = Str::repeat('a', 255);
 
     $response = $this->actingAs($user)->postJson('/api/accounts', [
         'name' => $name,
     ]);
 
-    $response->assertJson(fn (AssertableJson $json) => $json
-        ->where('id', 1)
-        ->where('name', $name)
-        ->where('balance', 0)
-        ->hasAll(['created_at', 'updated_at'])
-        ->where('deleted_at', null)
-        ->etc()
-    );
+    $response
+        ->assertSuccessful()
+        ->assertJson(fn (AssertableJson $json) => $json
+            ->where('id', 1)
+            ->where('name', $name)
+            ->where('balance', 0)
+            ->hasAll(['created_at', 'updated_at'])
+            ->where('deleted_at', null)
+            ->etc()
+        );
 });
 
 test('cannot create a new account for non unauthenticated user', function () {
@@ -51,20 +55,24 @@ test('cannot create a new account without a name', function () {
     $user = User::factory()->create();
     $response = $this->actingAs($user)->postJson('/api/accounts', []);
 
-    $response->assertInvalid([
-        'name' => 'The name field is required.',
-    ]);
+    $response
+        ->assertStatus(422)
+        ->assertInvalid([
+            'name' => 'The name field is required.',
+        ]);
 });
 
 test('cannot create a new account with very long name', function () {
     $user = User::factory()->create();
-    $name = str_repeat('a', 255 + 1);
+    $name = Str::repeat('a', 255 + 1);
 
     $response = $this->actingAs($user)->postJson('/api/accounts', [
         'name' => $name,
     ]);
 
-    $response->assertInvalid([
-        'name' => 'The name field must not be greater than 255 characters.',
-    ]);
+    $response
+        ->assertStatus(422)
+        ->assertInvalid([
+            'name' => 'The name field must not be greater than 255 characters.',
+        ]);
 });
