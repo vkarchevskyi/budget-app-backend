@@ -23,16 +23,12 @@ class TransactionResource extends Data
         public readonly int $userId,
         public readonly int $accountId,
         public readonly int $price,
-
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
         public readonly Carbon $date,
-
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
         public readonly Carbon $createdAt,
-
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
         public readonly Carbon $updatedAt,
-
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
         public readonly ?Carbon $deletedAt
     ) {

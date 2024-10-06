@@ -72,10 +72,27 @@ class TransactionController extends Controller
     }
 
     public function update(
-        int $id,
+        Transaction $transaction,
         UpdateTransactionRequest $request,
         UpdateTransactionAction $updateTransactionAction
     ): TransactionResource {
-        return TransactionResource::from($updateTransactionAction->run($id, UpdateTransactionDTO::from($request)));
+        Gate::authorize('update', $transaction);
+
+        $data = UpdateTransactionDTO::from($request);
+
+        return TransactionResource::from(
+            $updateTransactionAction->run($transaction, $data)
+        );
+    }
+
+    public function destroy(Transaction $transaction, DeleteTransactionAction $deleteTransactionAction): JsonResponse
+    {
+        Gate::authorize('delete', $transaction);
+
+        if ($deleteTransactionAction->run($transaction)) {
+            return response()->json(['message' => 'Transaction deleted successfully.'], Response::HTTP_OK);
+        }
+
+        return response()->json(['message' => 'Failed to delete transaction.'], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
