@@ -21,7 +21,6 @@ class AccountFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'balance' => $this->faker->numberBetween(0, 10000),
             'user_id' => User::factory(),
         ];
     }
