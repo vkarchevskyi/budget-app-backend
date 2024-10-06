@@ -68,7 +68,7 @@
         ],
         "phpdoc": [
             "@php artisan ide-helper:models",
-            "./vendor/bin/pint app"
+            "XDEBUG_MODE=off ./vendor/bin/pint app"
         ],
         "lint": [
             "composer pint-fix",
