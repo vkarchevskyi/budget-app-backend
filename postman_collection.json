@@ -648,7 +648,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Test Category",
+									"value": "Spending Category",
+									"type": "text"
+								},
+								{
+									"key": "is_income",
+									"value": "1",
+									"description": "Determine if this category are income or spending. Valid values are \"1\" and \"0\"",
 									"type": "text"
 								}
 							]
@@ -729,18 +735,23 @@
 									"key": "name",
 									"value": "New Category",
 									"type": "text"
+								},
+								{
+									"key": "is_income",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{domain}}/api/categories/1",
+							"raw": "{{domain}}/api/categories/2",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
 								"api",
 								"categories",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -851,17 +862,17 @@
 								},
 								{
 									"key": "category_id",
-									"value": "3",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "account_id",
-									"value": "3",
+									"value": "4",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "2222",
+									"value": "3000",
 									"type": "text"
 								},
 								{
