@@ -20,10 +20,7 @@ readonly class CreateCategoryAction
         $this->validate($createCategoryDTO);
 
         return DB::transaction(
-            fn (): Category => Category::query()->create([
-                'name' => $createCategoryDTO->name,
-                'user_id' => $createCategoryDTO->userId,
-            ])
+            fn (): Category => Category::query()->create($createCategoryDTO->all())
         );
     }
 
@@ -35,6 +32,7 @@ readonly class CreateCategoryAction
         Validator::make($createCategoryDTO->all(), [
             'name' => 'required|string|min:1|max:255',
             'user_id' => 'required|integer|min:1|exists:users,id',
+            'is_income' => 'required|boolean',
         ])->validate();
     }
 }

@@ -16,6 +16,7 @@ class CategoryResource extends Data
         public readonly int $id,
         public readonly int $userId,
         public readonly string $name,
+        public readonly bool $isIncome,
         public readonly Carbon $createdAt,
         public readonly Carbon $updatedAt,
         public readonly ?Carbon $deletedAt

@@ -26,6 +26,7 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:1|max:255',
+            'is_income' => 'required|boolean',
         ];
     }
 }

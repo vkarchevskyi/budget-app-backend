@@ -52,6 +52,7 @@ class CategoryController extends Controller
         $data = CreateCategoryDTO::from([
             'name' => $request->str('name')->toString(),
             'userId' => auth()->id(),
+            'isIncome' => $request->boolean('is_income'),
         ]);
 
         return CategoryResource::from($createCategoryAction->run($data));
