@@ -13,4 +13,5 @@ use Spatie\LaravelData\Optional;
 class UpdateCategoryDTO extends Data
 {
     public string|Optional $name;
+    public bool|Optional $isIncome;
 }

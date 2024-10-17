@@ -13,4 +13,5 @@ class CreateCategoryDTO extends Data
 {
     public string $name;
     public int $userId;
+    public bool $isIncome;
 }
