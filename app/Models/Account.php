@@ -80,6 +80,9 @@ class Account extends Model
 
     public function getBalanceAttribute(): int
     {
-        return $this->transactions()->sum('price');
+        return (int) $this->transactions()
+            ->join('categories', 'transactions.category_id', '=', 'categories.id')
+            ->selectRaw('SUM(CASE WHEN categories.is_income THEN transactions.price ELSE -transactions.price END) as balance')
+            ->value('balance');
     }
 }
