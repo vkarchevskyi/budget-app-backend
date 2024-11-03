@@ -35,6 +35,7 @@ readonly class UpdateCategoryAction
     {
         Validator::make($updateCategoryDTO->all(), [
             'name' => 'sometimes|required|string|min:1|max:255',
+            'is_income' => 'sometimes|required|boolean',
         ])->validate();
     }
 }

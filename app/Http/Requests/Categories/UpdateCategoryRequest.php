@@ -26,6 +26,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|min:1|max:255',
+            'is_income' => 'sometimes|required|boolean',
         ];
     }
 }
