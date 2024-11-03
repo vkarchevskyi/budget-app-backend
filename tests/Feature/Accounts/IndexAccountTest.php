@@ -7,6 +7,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
+    $this->appUrl = env('APP_URL');
 });
 
 test('Unauthorized user cannot receive accounts', function () {
@@ -22,12 +23,12 @@ test('Test default pagination settings', function () {
     $response->assertSuccessful()
         ->assertJson(fn (AssertableJson $json) => $json
             ->where('current_page', 1)
-            ->where('first_page_url', 'http://localhost/api/accounts?page=1')
+            ->where('first_page_url', $this->appUrl . '/api/accounts?page=1')
             ->where('from', 1)
             ->where('last_page', 2)
-            ->where('last_page_url', 'http://localhost/api/accounts?page=2')
-            ->where('next_page_url', 'http://localhost/api/accounts?page=2')
-            ->where('path', 'http://localhost/api/accounts')
+            ->where('last_page_url', $this->appUrl . '/api/accounts?page=2')
+            ->where('next_page_url', $this->appUrl . '/api/accounts?page=2')
+            ->where('path', $this->appUrl . '/api/accounts')
             ->where('per_page', 15)
             ->where('prev_page_url', null)
             ->where('to', 15)

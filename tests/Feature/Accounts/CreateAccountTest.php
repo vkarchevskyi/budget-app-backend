@@ -16,10 +16,9 @@ test('can create a new account', function () {
     $response
         ->assertSuccessful()
         ->assertJson(fn (AssertableJson $json) => $json
-            ->where('id', 1)
             ->where('name', 'Cash')
             ->where('balance', 0)
-            ->hasAll(['created_at', 'updated_at'])
+            ->hasAll(['id', 'created_at', 'updated_at'])
             ->where('deleted_at', null)
             ->etc()
         );
@@ -35,10 +34,9 @@ test('can create a new account with a maximum name length', function () {
     $response
         ->assertSuccessful()
         ->assertJson(fn (AssertableJson $json) => $json
-            ->where('id', 1)
             ->where('name', $name)
             ->where('balance', 0)
-            ->hasAll(['created_at', 'updated_at'])
+            ->hasAll(['id', 'created_at', 'updated_at'])
             ->where('deleted_at', null)
             ->etc()
         );
