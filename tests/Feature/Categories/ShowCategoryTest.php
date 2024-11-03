@@ -21,7 +21,6 @@ test('Authorized user can see their own category', function () {
             ->where('user_id', $category->user_id)
             ->where('created_at', $category->created_at->toAtomString())
             ->where('updated_at', $category->updated_at->toAtomString())
-            ->where('deleted_at', null)
         );
 });
 

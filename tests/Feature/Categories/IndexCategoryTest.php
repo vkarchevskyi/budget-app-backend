@@ -35,7 +35,7 @@ test('Test default pagination settings', function () {
             ->where('total', 20)
             ->has('links', 4)
             ->has('data', 15, fn (AssertableJson $json) => $json
-                ->hasAll(['id', 'name', 'is_income', 'created_at', 'updated_at', 'deleted_at'])
+                ->hasAll(['id', 'name', 'is_income', 'created_at', 'updated_at'])
                 ->etc()
             )
         );

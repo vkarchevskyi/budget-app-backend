@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
 class AccountResource extends Data
@@ -18,7 +19,7 @@ class AccountResource extends Data
         public readonly int $balance,
         public readonly Carbon $createdAt,
         public readonly Carbon $updatedAt,
-        public readonly ?Carbon $deletedAt
+        public readonly Carbon|Optional $deletedAt
     ) {
     }
 }

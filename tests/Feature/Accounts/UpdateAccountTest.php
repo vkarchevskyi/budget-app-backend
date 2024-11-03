@@ -23,7 +23,6 @@ test('can update an account name', function () {
             ->where('name', 'Card')
             ->where('balance', 0)
             ->hasAll(['created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 
@@ -93,7 +92,6 @@ test('can update an account without changing the name', function () {
             ->where('name', $account->name)
             ->where('balance', 0)
             ->hasAll(['created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 

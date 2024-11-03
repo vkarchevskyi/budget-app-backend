@@ -41,8 +41,8 @@ class TransactionPolicy
     public function update(User $user, Transaction $transaction, Category $category, Account $account): bool
     {
         return $user->id === $transaction->user_id
-            || $user->id === $account->user_id
-            || $user->id === $category->user_id;
+            && $user->id === $account->user_id
+            && $user->id === $category->user_id;
     }
 
     /**

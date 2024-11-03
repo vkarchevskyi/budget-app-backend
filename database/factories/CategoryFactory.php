@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'user_id' => User::factory(),
-            'is_income' => false,
+            'is_income' => $this->faker->boolean(),
         ];
     }
 }

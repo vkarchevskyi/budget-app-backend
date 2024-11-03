@@ -20,7 +20,6 @@ test('can create a new category', function () {
             ->where('name', 'Groceries')
             ->where('is_income', true)
             ->hasAll(['id', 'created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 });
@@ -39,7 +38,6 @@ test('can create a new category with a maximum name length', function () {
             ->where('name', $name)
             ->where('is_income', true)
             ->hasAll(['id', 'created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 });

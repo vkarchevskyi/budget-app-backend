@@ -11,6 +11,7 @@ use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
 class TransactionResource extends Data
@@ -18,7 +19,7 @@ class TransactionResource extends Data
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly ?string $description,
+        public readonly string|Optional $description,
         public readonly int $categoryId,
         public readonly int $userId,
         public readonly int $accountId,
@@ -30,7 +31,7 @@ class TransactionResource extends Data
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
         public readonly Carbon $updatedAt,
         #[WithCast(DateTimeInterfaceCast::class, format: CarbonInterface::DEFAULT_TO_STRING_FORMAT)]
-        public readonly ?Carbon $deletedAt
+        public readonly Carbon|Optional $deletedAt
     ) {
     }
 }

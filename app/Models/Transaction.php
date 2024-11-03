@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $user_id
  * @property int $account_id
  * @property int $price
- * @property string $date
+ * @property \Illuminate\Support\Carbon $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -61,6 +61,13 @@ class Transaction extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'date' => 'datetime',
     ];
 
     /**
