@@ -9,7 +9,10 @@ beforeEach(function () {
 });
 
 test('Authorized user can see their own category', function () {
-    $category = Category::factory()->create(['user_id' => $this->user->id]);
+    $category = Category::factory()->create([
+        'user_id' => $this->user->id,
+        'is_income' => false,
+    ]);
 
     $response = $this->actingAs($this->user)->getJson("/api/categories/$category->id");
 
