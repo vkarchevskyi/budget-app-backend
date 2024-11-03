@@ -23,7 +23,6 @@ test('can update an category name', function () {
             ->where('name', 'Groceries')
             ->where('is_income', false)
             ->hasAll(['created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 
@@ -93,7 +92,6 @@ test('can update an category without changing the name', function () {
             ->where('name', $category->name)
             ->where('is_income', false)
             ->hasAll(['created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 

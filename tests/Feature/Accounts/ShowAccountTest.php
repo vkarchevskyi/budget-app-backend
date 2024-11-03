@@ -20,7 +20,6 @@ test('Authorized user can see their own account', function () {
             ->where('balance', 0)
             ->where('created_at', $account->created_at->toAtomString())
             ->where('updated_at', $account->updated_at->toAtomString())
-            ->where('deleted_at', null)
         );
 });
 

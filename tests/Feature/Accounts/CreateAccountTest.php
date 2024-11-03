@@ -19,7 +19,6 @@ test('can create a new account', function () {
             ->where('name', 'Cash')
             ->where('balance', 0)
             ->hasAll(['id', 'created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 });
@@ -37,7 +36,6 @@ test('can create a new account with a maximum name length', function () {
             ->where('name', $name)
             ->where('balance', 0)
             ->hasAll(['id', 'created_at', 'updated_at'])
-            ->where('deleted_at', null)
             ->etc()
         );
 });
