@@ -13,7 +13,8 @@ test('can update an category name', function () {
     $category = Category::factory()->state(['user_id' => $this->user->id])->create();
 
     $response = $this->actingAs($this->user)->patchJson("/api/categories/$category->id", [
-        'name' => 'Groceries'
+        'name' => 'Groceries',
+        'is_income' => false,
     ]);
 
     $response
