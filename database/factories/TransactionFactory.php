@@ -27,8 +27,8 @@ class TransactionFactory extends Factory
             'user_id' => User::factory(),
             'account_id' => Account::factory(),
             'category_id' => Category::factory(),
-            'price' => $this->faker->numberBetween(0, 10000),
-            'date' => $this->faker->dateTime(),
+            'price' => $this->faker->numberBetween(100, 100000),
+            'date' => $this->faker->dateTimeBetween('-2 years', 'now'),
         ];
     }
 }

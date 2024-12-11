@@ -6,12 +6,12 @@ namespace App\Resources\Categories;
 
 use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Attributes\MapName;
-use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Optional;
+use Spatie\LaravelData\Resource;
 
 #[MapName(SnakeCaseMapper::class)]
-class CategoryResource extends Data
+class CategoryResource extends Resource
 {
     public function __construct(
         public readonly int $id,
