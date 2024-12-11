@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\TransactionController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,5 +43,11 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
             Route::get('{transaction}', [TransactionController::class, 'show']);
             Route::patch('{transaction}', [TransactionController::class, 'update']);
             Route::delete('{transaction}', [TransactionController::class, 'destroy']);
+        });
+
+    Route::prefix('charts')
+        ->name('charts')
+        ->group(function (): void {
+            Route::get('expenses', [ChartController::class, 'expenses']);
         });
 });
