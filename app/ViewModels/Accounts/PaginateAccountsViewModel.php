@@ -24,10 +24,10 @@ readonly class PaginateAccountsViewModel
             $query->where('name', 'ilike', "%$paginateDTO->search%");
         }
 
-        $query->where("user_id", $paginateDTO->userId)
+        $query->where('user_id', $paginateDTO->userId)
             ->orderBy($paginateDTO->sortBy, $paginateDTO->sortOrder);
 
-        $paginatedData = $query->paginate($paginateDTO->perPage, ["*"], "page", $paginateDTO->page);
+        $paginatedData = $query->paginate($paginateDTO->perPage, ['*'], 'page', $paginateDTO->page);
 
         /** @var LengthAwarePaginator<AccountResource> $paginatedResource */
         $paginatedResource = AccountResource::collect($paginatedData, LengthAwarePaginator::class);

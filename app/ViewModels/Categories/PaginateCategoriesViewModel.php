@@ -20,10 +20,10 @@ readonly class PaginateCategoriesViewModel
             $query->where('name', 'ilike', "%$paginateDTO->search%");
         }
 
-        $query->where("user_id", $paginateDTO->userId)
+        $query->where('user_id', $paginateDTO->userId)
             ->orderBy($paginateDTO->sortBy, $paginateDTO->sortOrder);
 
-        $paginatedData = $query->paginate($paginateDTO->perPage, ["*"], "page", $paginateDTO->page);
+        $paginatedData = $query->paginate($paginateDTO->perPage, ['*'], 'page', $paginateDTO->page);
 
         /** @var LengthAwarePaginator<CategoryResource> $paginatedResource */
         $paginatedResource = CategoryResource::collect($paginatedData, LengthAwarePaginator::class);
