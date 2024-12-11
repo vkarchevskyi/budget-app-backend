@@ -9,12 +9,12 @@ use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
-use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Optional;
+use Spatie\LaravelData\Resource;
 
 #[MapName(SnakeCaseMapper::class)]
-class TransactionResource extends Data
+class TransactionResource extends Resource
 {
     public function __construct(
         public readonly int $id,
